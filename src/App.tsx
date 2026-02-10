@@ -48,19 +48,14 @@ function MainApp({ onLogout }: { onLogout: () => void }) {
   const [aiAnalysis, setAiAnalysis] = useState<AiAnalysisResult | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState('');
-  const [hasApiKey, setHasApiKey] = useState(!!loadApiKey());
+
 
   // Auto-save config when changed
   useEffect(() => {
     saveConfig({ numSchools, numRooms, numSessions });
   }, [numSchools, numRooms, numSessions]);
 
-  // AI INSTRUCTIONS.md Mục 2: Khi chưa có key, hiển thị Modal bắt buộc nhập
-  useEffect(() => {
-    if (!loadApiKey()) {
-      setShowApiKeyModal(true);
-    }
-  }, []);
+
 
   const handleTeachersLoaded = (loadedTeachers: Omit<Teacher, 'id' | 'project_id'>[]) => {
     setTeachers(loadedTeachers);
@@ -175,27 +170,15 @@ function MainApp({ onLogout }: { onLogout: () => void }) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              {/* AI INSTRUCTIONS.md Mục 2: Nút Settings (API Key) kèm dòng chữ màu đỏ luôn hiển thị */}
               <button
                 onClick={() => setShowApiKeyModal(true)}
                 className="settings-btn"
               >
                 <Settings className="w-4 h-4" />
-                <span className="hidden sm:inline">Settings (API Key)</span>
+                <span className="hidden sm:inline">Cài đặt AI</span>
               </button>
-              <span className="text-red-300 text-xs font-semibold hidden md:inline">
-                Lấy API key để sử dụng app
-              </span>
             </div>
           </div>
-          {!hasApiKey && (
-            <div className="relative z-10 mt-4 flex items-center gap-2 text-sm bg-red-500/20 border border-red-400/30 rounded-xl px-4 py-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-300" />
-              <span className="text-red-200 font-medium">
-                ⚠️ Chưa có API key · <button onClick={() => setShowApiKeyModal(true)} className="underline font-bold text-white hover:text-yellow-200 transition">Nhập ngay để sử dụng app</button>
-              </span>
-            </div>
-          )}
         </header>
 
         {/* Main Content */}
@@ -364,14 +347,11 @@ function MainApp({ onLogout }: { onLogout: () => void }) {
         </footer>
       </div>
 
-      {/* API Key Modal - AI INSTRUCTIONS.md: mandatory khi chưa có key */}
+      {/* API Key Modal - không bắt buộc, chỉ cần khi dùng AI */}
       <ApiKeyModal
         isOpen={showApiKeyModal}
-        onClose={() => {
-          setShowApiKeyModal(false);
-          setHasApiKey(!!loadApiKey());
-        }}
-        mandatory={!hasApiKey}
+        onClose={() => setShowApiKeyModal(false)}
+        mandatory={false}
       />
     </div>
   );
