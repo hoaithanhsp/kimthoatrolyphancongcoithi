@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { GraduationCap, Download, Loader2, Settings, Sparkles, Brain, Star, AlertCircle } from 'lucide-react';
+import LoginScreen from './components/LoginScreen';
+import AuthorInfo from './components/AuthorInfo';
 import ConfigForm from './components/ConfigForm';
 import FileUpload from './components/FileUpload';
 import RoomLayoutUpload from './components/RoomLayoutUpload';
@@ -15,6 +17,22 @@ import { loadConfig, saveConfig, loadApiKey } from './lib/storage';
 import type { Teacher, ScheduleWithDetails, ValidationResult, TeacherWorkload, RoomCluster } from './types';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('pcct_logged_in') === 'true');
+
+  const handleLogout = () => {
+    localStorage.removeItem('pcct_logged_in');
+    setIsLoggedIn(false);
+  };
+
+  // Hiển thị màn hình đăng nhập nếu chưa login
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
+  }
+
+  return <MainApp onLogout={handleLogout} />;
+}
+
+function MainApp({ onLogout }: { onLogout: () => void }) {
   const savedConfig = loadConfig();
   const [numSchools, setNumSchools] = useState(savedConfig.numSchools);
   const [numRooms, setNumRooms] = useState(savedConfig.numRooms);
@@ -137,6 +155,9 @@ export default function App() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #ecfeff 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Author Info Bar */}
+        <AuthorInfo onLogout={onLogout} />
+
         {/* Header */}
         <header className="header-gradient px-8 py-6 mb-8">
           <div className="flex items-center justify-between relative z-10">

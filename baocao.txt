@@ -1,0 +1,85 @@
+BÁO CÁO SẢN PHẨM: PHÂN CÔNG COI THI THPT
+Hệ thống Phân công Giám thị Coi thi Tốt nghiệp THPT thông minh với AI
+
+I. THÔNG TIN CHUNG
+- Tên sản phẩm: Phân Công Coi Thi THPT
+- Tác giả: Trần Thị Kim Thoa
+- Đơn vị công tác: Trường THPT Hoàng Diệu
+- Địa chỉ: Số 1 Mạc Đĩnh Chi, phường Phú Lợi, thành phố Cần Thơ
+- Năm thực hiện: 2026
+- Công nghệ: React, TypeScript, Vite, Tailwind CSS, Gemini AI
+- Triển khai: Vercel (https://vercel.com)
+
+II. LÝ DO CHỌN ĐỀ TÀI
+Trong mỗi kỳ thi tốt nghiệp THPT, việc phân công giám thị coi thi là công việc phức tạp và tốn nhiều thời gian. Ban phân công phải đảm bảo tuân thủ nhiều ràng buộc nghiêm ngặt theo quy chế thi: giám thị 1 (GT1) và giám thị 2 (GT2) trong cùng phòng thi không được cùng trường, khối lượng công việc phải được phân bổ công bằng, giám thị 3 (GT3) phải phụ trách cụm phòng hợp lý theo tầng và dãy nhà.
+
+Trước đây, công việc này được thực hiện thủ công bằng Excel, dễ xảy ra sai sót và mất nhiều giờ đối chiếu kiểm tra. Xuất phát từ thực tế đó, tôi đã xây dựng ứng dụng "Phân Công Coi Thi THPT" - một công cụ web tự động hóa toàn bộ quy trình phân công, tích hợp trí tuệ nhân tạo (AI) để phân tích và đánh giá chất lượng phân công.
+
+III. TÍNH NĂNG NỔI BẬT
+
+1. Tự động phân công giám thị theo quy chế thi
+- Phân công 3 loại giám thị: GT1 (Giám thị 1), GT2 (Giám thị 2), GT3 (Giám thị hành lang).
+- Tuân thủ nghiêm ngặt quy chế: GT1 và GT2 trong cùng phòng KHÔNG cùng trường.
+- GT3 được phân công theo cụm phòng (3-7 phòng), đảm bảo giám sát hợp lý.
+- Hỗ trợ cấu hình linh hoạt: số lượng trường (2-6), số phòng thi (5-50), số buổi thi (1-10).
+
+2. Nhập liệu bằng file Excel
+- Tải lên danh sách giám thị từ file Excel (.xlsx, .xls) với các cột: Họ tên, Trường, Vai trò ưu tiên.
+- Tải lên sơ đồ phòng thi (tùy chọn) để phân cụm GT3 theo tầng và dãy nhà.
+- Hỗ trợ tải file mẫu để người dùng dễ dàng chuẩn bị dữ liệu.
+- Kiểm tra tính hợp lệ của dữ liệu ngay khi tải lên.
+
+3. Cân bằng khối lượng công việc
+- Thuật toán tối ưu đảm bảo số ca gác giữa các giám thị chênh lệch tối thiểu (≤ 2 ca).
+- Hiển thị biểu đồ khối lượng trực quan với gradient bars.
+- Thống kê min/max ca gác để dễ đánh giá.
+
+4. Kiểm tra tính hợp lệ tự động
+- Xác minh toàn bộ lịch phân công theo quy chế thi.
+- Phát hiện và cảnh báo các vi phạm: cùng trường, trùng lặp cặp GT, mất cân bằng khối lượng.
+- Phân loại rõ ràng: Lỗi (phải sửa) và Cảnh báo (nên xem xét).
+
+5. Tích hợp AI phân tích (Google Gemini)
+- Phân tích lịch phân công bằng AI, phát hiện các vấn đề tiềm ẩn.
+- Gợi ý cải thiện cụ thể cho từng vấn đề.
+- Cho điểm đánh giá tổng quan (1-10) theo nhiều tiêu chí.
+- Cơ chế fallback tự động: gemini-3-flash-preview → gemini-3-pro-preview → gemini-2.5-flash.
+- Người dùng tự nhập API key miễn phí từ Google AI Studio.
+
+6. Xuất kết quả ra Excel
+- Xuất lịch phân công hoàn chỉnh ra file Excel (.xlsx).
+- Bao gồm thống kê khối lượng công việc từng giám thị.
+- File Excel sẵn sàng in ấn và sử dụng tại điểm thi.
+
+7. Giao diện hiện đại và chuyên nghiệp
+- Thiết kế Glassmorphism với gradient backgrounds, animations mượt mà.
+- Responsive trên mọi thiết bị (máy tính, máy tính bảng, điện thoại).
+- Google Fonts Inter cho typography chuyên nghiệp.
+- Lưu trữ cấu hình tự động bằng localStorage.
+
+8. Bảo mật và đăng nhập
+- Màn hình đăng nhập bảo vệ ứng dụng.
+- Thông tin tác giả và logo hiển thị trong ứng dụng.
+
+IV. HIỆU QUẢ VÀ ỨNG DỤNG
+- Đối với ban tổ chức thi: Giảm thời gian phân công từ nhiều giờ xuống còn vài phút. Loại bỏ hoàn toàn sai sót do phân công thủ công.
+- Đối với giám thị: Đảm bảo công bằng trong phân bổ ca gác, minh bạch rõ ràng.
+- Đối với đơn vị quản lý: Có cơ sở dữ liệu rõ ràng, dễ kiểm tra và giám sát.
+- Tiết kiệm chi phí: Ứng dụng web miễn phí, chạy trực tiếp trên trình duyệt, không cần cài đặt phần mềm.
+
+V. CÔNG NGHỆ SỬ DỤNG
+- Frontend: React 18, TypeScript, Vite 5
+- Styling: Tailwind CSS, Custom CSS (Glassmorphism)
+- Xử lý Excel: thư viện xlsx (SheetJS)
+- AI: Google Gemini API (REST)
+- Lưu trữ: localStorage (client-side)
+- Triển khai: Vercel với SPA routing
+
+VI. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+Sản phẩm "Phân Công Coi Thi THPT" đã hoàn thiện đầy đủ các tính năng cần thiết và sẵn sàng ứng dụng trong kỳ thi tốt nghiệp THPT. Trong tương lai, tôi dự định sẽ phát triển thêm:
+- Lưu trữ đám mây để nhiều người cùng truy cập.
+- Tính năng in ấn trực tiếp phiếu phân công cho từng phòng thi.
+- Tích hợp gửi thông báo phân công qua email/Zalo cho giám thị.
+- Hỗ trợ nhiều kỳ thi cùng lúc với lịch sử phân công.
+
+Sản phẩm là tâm huyết của tác giả với mong muốn đóng góp một phần nhỏ bé vào công tác tổ chức thi tốt nghiệp THPT ngày càng chính xác, công bằng và hiệu quả hơn.
